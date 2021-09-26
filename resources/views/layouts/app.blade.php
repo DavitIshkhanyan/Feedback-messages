@@ -18,6 +18,36 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .view{
+            background-color: blue;
+            color: white;
+            padding: 7px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: 2px solid gray;
+        }
+        .view:hover, .view:active {
+            color: white;
+            text-decoration: none;
+            background-color: #f44336;
+        }
+        .delete{
+            background-color: #f44336;
+            color: white;
+            padding: 7px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: 2px solid gray;
+        }
+        .buttons{
+            display: flex;
+            gap: 10px;
+        }
+        </style>
 </head>
 <body>
     <div id="app">

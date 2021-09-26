@@ -19,5 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/', 'MessageController@sendMessage')->name('send.message');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/messages', 'MessageController@index')->name('messages')->middleware('admin');
+Route::get('/messages/{id}', 'MessageController@view')->name('message.view')->middleware('admin');
+Route::delete('/messages/{id}', 'MessageController@delete')->name('message.destroy')->middleware('admin');
+

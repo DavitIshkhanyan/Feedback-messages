@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('You don\'t have an admin role. Plese contact Davit Ishkhanyan to get admin role and permission to see messages.') }}
                 </div>
             </div>
         </div>

@@ -9,13 +9,12 @@ class MessageController extends Controller
 {
     public function sendMessage(Request $request)
     {
-        // dd(date("F j, Y, g:i a"));
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:messages'],
             'message_title' => ['required', 'string', 'max:255'],
-            'last_body' => ['required', 'string'],
+            'message_body' => ['required', 'string'],
         ]);
         Message::create([
             'first_name' => $request->input('first_name'),
@@ -27,4 +26,22 @@ class MessageController extends Controller
         ]);
         return redirect()->route('feedback')->with('info','Thank you for submitting the message');
     }
+
+    public function index(){
+        $messages = Message::all();
+        return view('messages',['messages'=>$messages]);
+    }
+
+   
+    public function view($id){
+        $message= Message::findOrFail($id);
+       return view('single_message')->with('message',$message);
+    }
+
+    public function delete($id)
+    {
+        Message::destroy($id);
+        return redirect()->route('messages');
+    }
+
 }
