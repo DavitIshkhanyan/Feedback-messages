@@ -12,9 +12,11 @@ class MessageController extends Controller
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:messages'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'message_title' => ['required', 'string', 'max:255'],
             'message_body' => ['required', 'string'],
+            // 'g-recaptcha-response' => 'required|captcha',
+            'terms' => 'required',
         ]);
         Message::create([
             'first_name' => $request->input('first_name'),

@@ -91,27 +91,31 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
+                        <div class="form-group mt-5">
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                {!! NoCaptcha::renderJs('eng', false, 'onloadCallback') !!}
+                                {!! NoCaptcha::display() !!}
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
                                     </span>
-                                @enderror
+                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        <div class="form-group{{ $errors->has('terms') ? ' has-error' : '' }}">
+                            <input type="checkbox" id="terms" class="form-control" name="terms" value="1" {{ !old('terms') ?: 'checked' }} />
+                            <input type="checkbox" id="terms" name="terms" value="1" {{ !old('terms') ?: 'checked' }} />
+                            <label for="terms">Agree with the terms and conditions</label>
+                          
+                            <div class="col-md-4">
+                                @if ($errors->has('terms'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('terms') }}</strong>
+                                </span>
+                                @endif
                             </div>
-                        </div> --}}
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -127,3 +131,9 @@
     </div>
 </div>
 @endsection
+
+<script>
+    var onloadCallback = function() {
+        alert('grecaptcha is ready!');
+    }
+</script>
